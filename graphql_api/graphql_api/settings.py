@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
-    # 'graphql_api.apps.ApiConfig',
     'users.apps.UsersConfig',
     'corsheaders',
 ]
@@ -65,7 +64,7 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 GRAPHENE = {
-    'SCHEMA': 'employee.schema.schema',
+    'SCHEMA': 'users.schema.schema',
     'MIDDLEWARE': [
         'graphql_jwt.middleware.JSONWebTokenMiddleware',
     ]
