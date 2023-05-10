@@ -17,7 +17,6 @@ import { GET_TOKEN } from '../queries';
 const theme = createTheme();
 
 export default function SignInSide() {
-
   const [getToken] = useMutation(GET_TOKEN);
 
   const handleSubmit = async (event) => {
@@ -26,7 +25,7 @@ export default function SignInSide() {
     const username = data.get('name');
     const password = data.get('password');
     try {
-      const result = await getToken({ variables: { username: username, password: password} });
+      const result = await getToken({ variables: { username: username, password: password } });
       localStorage.setItem('token', result.data.tokenAuth.token);
       result.data.tokenAuth.token && (window.location.href = '/');
     } catch (err) {
@@ -89,20 +88,18 @@ export default function SignInSide() {
                 id="password"
                 autoComplete="current-password"
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                 ログイン
               </Button>
               <Grid container>
                 <Grid item xs>
+                  <Link href="/" variant="body2">
+                    {'ホームに戻る'}
+                  </Link>
                 </Grid>
                 <Grid item>
                   <Link href="/signup" variant="body2">
-                    {"アカウントを作成する"}
+                    {'アカウントを作成する'}
                   </Link>
                 </Grid>
               </Grid>

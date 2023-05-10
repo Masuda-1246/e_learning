@@ -20,16 +20,16 @@ export default function SignUpSide() {
   const [createUser] = useMutation(CREATE_USER);
   const [getToken] = useMutation(GET_TOKEN);
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const username = data.get('name');
     const password = data.get('password');
     const email = data.get('email');
-    console.log(typeof username, typeof password, typeof email)
+    console.log(typeof username, typeof password, typeof email);
     try {
-      await createUser({ variables: { username: username, password: password, email: email} });
-      const result = await getToken({ variables: { username: username, password: password} });
+      await createUser({ variables: { username: username, password: password, email: email } });
+      const result = await getToken({ variables: { username: username, password: password } });
       localStorage.setItem('token', result.data.tokenAuth.token);
       result.data.tokenAuth.token && (window.location.href = '/');
     } catch (err) {
@@ -102,20 +102,18 @@ export default function SignUpSide() {
                 id="password"
                 autoComplete="current-password"
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                 登録
               </Button>
               <Grid container>
                 <Grid item xs>
+                  <Link href="/" variant="body2">
+                    {'ホームに戻る'}
+                  </Link>
                 </Grid>
                 <Grid item>
                   <Link href="/login" variant="body2">
-                    {"ログインはこちら"}
+                    {'ログインはこちら'}
                   </Link>
                 </Grid>
               </Grid>
