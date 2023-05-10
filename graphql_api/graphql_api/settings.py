@@ -56,11 +56,12 @@ MIDDLEWARE = [
 
 GRAPHQL_JWT = {
     'JWT_VERIFY_EXPIRATION': True,
-    'JWT_EXPIRATION_DELTA': timedelta(minutes=3000),
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=300000),
 }
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
+    "https://e-learning-rose-one.vercel.app",
 ]
 
 GRAPHENE = {
