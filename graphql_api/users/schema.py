@@ -10,7 +10,7 @@ class UserNode(DjangoObjectType):
     class Meta:
         model = get_user_model()
         filter_fields = {
-          'username': ['exact', 'icontains'],
+            'username': ['exact', 'icontains'],
         }
         interfaces = (relay.Node, )
 
@@ -37,7 +37,12 @@ class Mutation:
 
 class Query(graphene.ObjectType):
     all_users = DjangoFilterConnectionField(UserNode)
+    user = DjangoFilterConnectionField(UserNode)
 
     @login_required
     def resolve_all_users(self, info):
+        return get_user_model().objects.all()
+
+    def resolve_user(self, info, **kwargs):
+        username = kwargs.get('username')
         return get_user_model().objects.all()

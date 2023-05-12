@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'graphene_django',
     'users.apps.UsersConfig',
+    'lecture.apps.LectureConfig',
     'corsheaders',
 ]
 
