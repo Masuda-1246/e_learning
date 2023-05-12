@@ -17,7 +17,7 @@ function LectureStartTile(props) {
     <Grid item xs={12} md={6}>
       <CardActionArea
         onClick={() => {
-          navigate('/lecture', { state: { id: post.id } });
+          navigate('/lecture', { state: { url: post.lectureVideoElement } });
         }}
       >
         <Card sx={{ display: 'flex' }}>
@@ -35,8 +35,8 @@ function LectureStartTile(props) {
           <CardMedia
             component="img"
             sx={{ width: 160, display: { xs: 'none', sm: 'block' } }}
-            image={post.image}
-            alt={post.imageLabel}
+            image={post.lectureImageUrl}
+            alt={post.id}
           />
         </Card>
       </CardActionArea>

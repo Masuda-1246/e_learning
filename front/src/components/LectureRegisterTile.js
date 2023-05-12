@@ -35,7 +35,7 @@ function LectureRegisterTile(props) {
           <CardMedia
             component="img"
             sx={{ width: 160, display: { xs: 'none', sm: 'block' } }}
-            image={post.image}
+            image={post.lectureImageUrl}
             alt={post.imageLabel}
           />
         </Card>

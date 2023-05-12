@@ -11,23 +11,30 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import image from '../images/signin.jpg';
-import { useMutation } from '@apollo/react-hooks';
-import { GET_TOKEN } from '../queries';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
+import { GET_TOKEN, GET_USER } from '../queries';
 
 const theme = createTheme();
 
 export default function SignInSide() {
   const [getToken] = useMutation(GET_TOKEN);
+  const [getUser, { data }] = useLazyQuery(GET_USER);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const username = data.get('name');
-    const password = data.get('password');
+    const datas = new FormData(event.currentTarget);
+    const username = datas.get('name');
+    const password = datas.get('password');
     try {
       const result = await getToken({ variables: { username: username, password: password } });
       localStorage.setItem('token', result.data.tokenAuth.token);
-      result.data.tokenAuth.token && (window.location.href = '/');
+      await getUser({ variables: { username: username } });
+      if (data) {
+        console.log(data.user.edges[0].node.id);
+        localStorage.setItem('userId', data.user.edges[0].node.id);
+        window.location.href = '/';
+      }
     } catch (err) {
       alert(err);
     }

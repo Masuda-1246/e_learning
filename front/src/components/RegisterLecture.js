@@ -10,23 +10,25 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import ViewCard from './ViewCard';
 import LearningContents from './LearningContents';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_LECTURE, GET_REGISTER } from '../queries';
+import LinearProgress from '@mui/material/LinearProgress';
 
-const data = {
-  id: '10194',
-  title: 'PHPプログラミング: ウェブ開発のためのパワフルな言語',
-  date: 'Dec 15',
-  description:
-    'PHPは人気のあるサーバーサイドスクリプト言語で、ウェブ開発においてパワフルなツールとして知られています。この記事では、PHPの柔軟性、広範なウェブアプリケーション開発の可能性、CMS（コンテンツ管理システム）での利用例を紹介します',
-  image:
-    'https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80',
-  imageLabel: 'Image Text',
-};
 
 const theme = createTheme();
 
 export default function RegisterLecture() {
   const location = useLocation();
-  console.log(location.state);
+  const { loading, error, data } = useQuery(GET_LECTURE, {
+    variables: { id: location.state.id },
+  });
+  const { loading: loading2, error: error2, data: data2 } = useQuery(GET_REGISTER, {
+    variables: { lecture: location.state.id, user: localStorage.getItem('userId') },
+  });
+  if (loading || loading2) return <LinearProgress />;
+  if (error || error2) return <p>Error :{JSON.stringify(error)}(</p>;
+  if (data2.allRegistrations.edges.length !== 0) window.location.href = '/mypage';
+  else
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -64,17 +66,17 @@ export default function RegisterLecture() {
                 }}
               >
                 <Typography component="h1" variant="h4" color="inherit" gutterBottom>
-                  {data.title}
+                  {data.lecture.title}
                 </Typography>
                 <Typography variant="h7" color="inherit" paragraph>
-                  {data.description}
+                  {data.lecture.description}
                 </Typography>
               </Box>
             </Grid>
           </Grid>
         </Paper>
-        <ViewCard post={data} />
-        <LearningContents post={data} />
+        <ViewCard post={data.lecture} lecture_id={location.state.id} />
+        <LearningContents post={data.lecture}  />
       </Container>
     </ThemeProvider>
   );

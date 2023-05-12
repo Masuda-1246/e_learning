@@ -21,11 +21,9 @@ function LectureMainTile(props) {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundImage: `url(${post.image})`,
+        backgroundImage: `url(${post.lectureImageUrl})`,
       }}
     >
-      {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageLabel} height="185px" />}
       <Box
         sx={{
           position: 'absolute',

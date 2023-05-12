@@ -5,15 +5,16 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import HeaderNoMenu from './HeaderNoMenu';
 import Box from '@mui/material/Box';
 import Footer from './Footer';
+import { useLocation } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function LecturePage() {
+  const location = useLocation();
   useEffect(() => {
-    console.log('useEffect');
     const divElement = document.getElementById('youtube');
     divElement.innerHTML =
-      '<iframe width="860" height="515" src="https://www.youtube.com/embed/0DO5bsQB5So" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+      `<iframe width="860" height="515" src=${location.state.url} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
   }, []);
   return (
     <ThemeProvider theme={theme}>

@@ -26,7 +26,6 @@ export default function SignUpSide() {
     const username = data.get('name');
     const password = data.get('password');
     const email = data.get('email');
-    console.log(typeof username, typeof password, typeof email);
     try {
       await createUser({ variables: { username: username, password: password, email: email } });
       const result = await getToken({ variables: { username: username, password: password } });

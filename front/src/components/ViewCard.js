@@ -14,6 +14,8 @@ import Button from '@mui/material/Button';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import CastIcon from '@mui/icons-material/Cast';
 import FeedIcon from '@mui/icons-material/Feed';
+import { useMutation } from '@apollo/react-hooks';
+import { CREATE_REGISTER } from '../queries';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -27,15 +29,25 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function ViewCard(props) {
-  const { post } = props;
+  const { post, lecture_id } = props;
   const [expanded, setExpanded] = React.useState(false);
+  const [registerLecture] = useMutation(CREATE_REGISTER);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const handleRegisterClick = () => {
-    console.log('register');
+
+  const handleRegisterClick = (event) => {
+    event.preventDefault();
+    console.log(lecture_id);
+    console.log(localStorage.getItem('userId'));
+    registerLecture({
+      variables: {
+        lecture: lecture_id,
+        user: localStorage.getItem('userId'),
+      },
+    });
     window.location.href = '/mypage';
   };
 
@@ -50,7 +62,7 @@ export default function ViewCard(props) {
         },
       }}
     >
-      <CardMedia component="img" height="194" image={post.image} alt="Paella dish" />
+      <CardMedia component="img" height="194" image={post.lectureImageUrl} alt="Paella dish" />
       <CardContent>
         {localStorage.getItem('token') ? (
           <Button fullWidth variant="contained" sx={{ mt: 1, mb: 2 }} onClick={handleRegisterClick}>
