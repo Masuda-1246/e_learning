@@ -13,18 +13,18 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 
+import environ
+import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(j4m20tv*iq0h=kq4@gblymvki_=pe7r5r%c)6)fg-#o2))9w^'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -63,6 +63,7 @@ GRAPHQL_JWT = {
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "https://e-learning-rose-one.vercel.app",
+    "https://e-learning-git-main-masuda-1246.vercel.app",
 ]
 
 GRAPHENE = {
