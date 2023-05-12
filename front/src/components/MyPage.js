@@ -37,7 +37,7 @@ export default function MyPage() {
 
   const { loading, error, data } = useQuery(GET_MY_LECTURE, {
     variables: { user: localStorage.getItem('userId') },
-    });
+  });
   if (loading) return <LinearProgress />;
   if (error) return <p>Error :(</p>;
   console.log(data);

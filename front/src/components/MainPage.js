@@ -26,7 +26,11 @@ export default function MainPage() {
       <Container maxWidth="lg">
         <Header />
         <main>
-          <LectureMainTile post={data.allLectures.edges[Math.floor(Math.random() * data.allLectures.edges.length)].node} />
+          <LectureMainTile
+            post={
+              data.allLectures.edges[Math.floor(Math.random() * data.allLectures.edges.length)].node
+            }
+          />
           <Grid container spacing={4}>
             {data.allLectures.edges.map((post) => (
               <LectureRegisterTile key={post.node.id} post={post.node} />

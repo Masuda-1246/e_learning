@@ -20,7 +20,6 @@ export default function SignInSide() {
   const [getToken] = useMutation(GET_TOKEN);
   const [getUser, { data }] = useLazyQuery(GET_USER);
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const datas = new FormData(event.currentTarget);

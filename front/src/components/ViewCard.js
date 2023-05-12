@@ -37,7 +37,6 @@ export default function ViewCard(props) {
     setExpanded(!expanded);
   };
 
-
   const handleRegisterClick = (event) => {
     event.preventDefault();
     console.log(lecture_id);

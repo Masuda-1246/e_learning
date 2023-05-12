@@ -21,9 +21,9 @@ export const GET_TOKEN = gql`
 
 export const GET_ALL_LECTURE = gql`
   query {
-    allLectures{
-      edges{
-        node{
+    allLectures {
+      edges {
+        node {
           id
           title
           lectureImageUrl
@@ -37,8 +37,8 @@ export const GET_ALL_LECTURE = gql`
 `;
 
 export const GET_LECTURE = gql`
-  query ($id: ID!){
-    lecture(id:$id){
+  query ($id: ID!) {
+    lecture(id: $id) {
       id
       title
       lectureImageUrl
@@ -50,10 +50,10 @@ export const GET_LECTURE = gql`
 `;
 
 export const GET_USER = gql`
-  query getUser($username: String!){
-    user(username: $username){
-      edges{
-        node{
+  query getUser($username: String!) {
+    user(username: $username) {
+      edges {
+        node {
           id
           username
         }
@@ -73,10 +73,10 @@ export const CREATE_REGISTER = gql`
 `;
 
 export const GET_REGISTER = gql`
-  query getRegister($user: ID!, $lecture: ID!){
-    allRegistrations(user: $user, lecture: $lecture){
-      edges{
-        node{
+  query getRegister($user: ID!, $lecture: ID!) {
+    allRegistrations(user: $user, lecture: $lecture) {
+      edges {
+        node {
           id
         }
       }
@@ -85,11 +85,11 @@ export const GET_REGISTER = gql`
 `;
 
 export const GET_MY_LECTURE = gql`
-  query getMyLecture($user: ID!){
-    allRegistrations(user: $user){
-      edges{
-        node{
-          lecture{
+  query getMyLecture($user: ID!) {
+    allRegistrations(user: $user) {
+      edges {
+        node {
+          lecture {
             id
             title
             lectureImageUrl

@@ -13,8 +13,7 @@ export default function LecturePage() {
   const location = useLocation();
   useEffect(() => {
     const divElement = document.getElementById('youtube');
-    divElement.innerHTML =
-      `<iframe width="860" height="515" src=${location.state.url} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+    divElement.innerHTML = `<iframe width="860" height="515" src=${location.state.url} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
   }, []);
   return (
     <ThemeProvider theme={theme}>
