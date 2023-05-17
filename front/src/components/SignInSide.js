@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,15 +29,17 @@ export default function SignInSide() {
       const result = await getToken({ variables: { username: username, password: password } });
       localStorage.setItem('token', result.data.tokenAuth.token);
       await getUser({ variables: { username: username } });
-      if (data) {
-        console.log(data.user.edges[0].node.id);
-        localStorage.setItem('userId', data.user.edges[0].node.id);
-        window.location.href = '/';
-      }
     } catch (err) {
       alert(err);
     }
   };
+
+  useEffect(() => {
+    if (data) {
+      localStorage.setItem('userId', data.user.edges[0].node.id);
+      window.location.href = '/';
+    }
+  }, [data]);
 
   return (
     <ThemeProvider theme={theme}>

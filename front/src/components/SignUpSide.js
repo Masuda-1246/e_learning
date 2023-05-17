@@ -22,15 +22,15 @@ export default function SignUpSide() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const username = data.get('name');
-    const password = data.get('password');
-    const email = data.get('email');
+    const data1 = new FormData(event.currentTarget);
+    const username = data1.get('name');
+    const password = data1.get('password');
+    const email = data1.get('email');
     try {
       await createUser({ variables: { username: username, password: password, email: email } });
       const result = await getToken({ variables: { username: username, password: password } });
       localStorage.setItem('token', result.data.tokenAuth.token);
-      result.data.tokenAuth.token && (window.location.href = '/');
+      result.data.tokenAuth.token && (window.location.href = '/login');
     } catch (err) {
       alert(err);
     }

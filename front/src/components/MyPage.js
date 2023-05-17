@@ -39,7 +39,7 @@ export default function MyPage() {
     variables: { user: localStorage.getItem('userId') },
   });
   if (loading) return <LinearProgress />;
-  if (error) return <p>Error :(</p>;
+  if (error) return <p>Error :{JSON.stringify(error)}</p>;
   console.log(data);
   return (
     <ThemeProvider theme={theme}>
