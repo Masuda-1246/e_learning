@@ -8,9 +8,10 @@ import MainPage from './components/MainPage';
 import RegisterLecture from './components/RegisterLecture';
 import MyPage from './components/MyPage';
 import LecturePage from './components/LecturePage';
+import TestPage from './components/TestPage';
 
 const client = new ApolloClient({
-  uri: 'http://127.0.0.1:8000/graphql/',
+  uri: 'https://15.152.49.212:8000/graphql/',
   headers: {
     authorization: localStorage.getItem('token') ? `JWT ${localStorage.getItem('token')}` : '',
   },
@@ -28,6 +29,7 @@ function App() {
             <Route path="/register" element={<RegisterLecture />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/lecture" element={<LecturePage />} />
+            <Route path="/test" element={<TestPage />} />
           </Routes>
         </BrowserRouter>
       </div>

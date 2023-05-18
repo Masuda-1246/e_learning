@@ -102,3 +102,21 @@ export const GET_MY_LECTURE = gql`
     }
   }
 `;
+
+export const GET_TESTS = gql`
+  query getTests($lecture: ID!) {
+    allTests(lecture: $lecture) {
+      edges {
+        node {
+          id
+          question
+          answer
+          option1
+          option2
+          option3
+          option4
+        }
+      }
+    }
+  }
+`;

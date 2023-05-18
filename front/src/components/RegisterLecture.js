@@ -11,26 +11,19 @@ import Typography from '@mui/material/Typography';
 import ViewCard from './ViewCard';
 import LearningContents from './LearningContents';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_LECTURE, GET_REGISTER } from '../queries';
+import { GET_LECTURE } from '../queries';
 import LinearProgress from '@mui/material/LinearProgress';
 
 const theme = createTheme();
 
 export default function RegisterLecture() {
   const location = useLocation();
+  if (!location.state) window.location.href = '/';
   const { loading, error, data } = useQuery(GET_LECTURE, {
     variables: { id: location.state.id },
   });
-  const {
-    loading: loading2,
-    error: error2,
-    data: data2,
-  } = useQuery(GET_REGISTER, {
-    variables: { lecture: location.state.id, user: localStorage.getItem('userId') },
-  });
-  if (loading || loading2) return <LinearProgress />;
-  if (error || error2) return <p>Error :{JSON.stringify(error)}(</p>;
-  if (data2.allRegistrations.edges.length !== 0) window.location.href = '/mypage';
+  if (loading) return <LinearProgress />;
+  if (error) return <p>Error :{JSON.stringify(error)}</p>;
   else
     return (
       <ThemeProvider theme={theme}>

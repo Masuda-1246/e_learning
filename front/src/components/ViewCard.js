@@ -14,8 +14,8 @@ import Button from '@mui/material/Button';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import CastIcon from '@mui/icons-material/Cast';
 import FeedIcon from '@mui/icons-material/Feed';
-import { useMutation } from '@apollo/react-hooks';
-import { CREATE_REGISTER } from '../queries';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
+import { CREATE_REGISTER, GET_REGISTER } from '../queries';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -32,6 +32,7 @@ export default function ViewCard(props) {
   const { post, lecture_id } = props;
   const [expanded, setExpanded] = React.useState(false);
   const [registerLecture] = useMutation(CREATE_REGISTER);
+  const [getRegister, { data }] = useLazyQuery(GET_REGISTER);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -50,6 +51,40 @@ export default function ViewCard(props) {
     window.location.href = '/mypage';
   };
 
+  React.useEffect(() => {
+    if (localStorage.getItem('token')) {
+      getRegister({
+        variables: {
+          lecture: lecture_id,
+          user: localStorage.getItem('userId'),
+        },
+      });
+    }
+  }, []);
+
+  let button;
+  if (localStorage.getItem('token')) {
+    if (data && data.allRegistrations.edges.length > 0) {
+      button = (
+        <Button fullWidth variant="contained" sx={{ mt: 1, mb: 2 }} disabled>
+          登録済み
+        </Button>
+      );
+    } else {
+      button = (
+        <Button fullWidth variant="contained" sx={{ mt: 1, mb: 2 }} onClick={handleRegisterClick}>
+          登録
+        </Button>
+      );
+    }
+  } else {
+    button = (
+      <Button fullWidth variant="contained" sx={{ mt: 1, mb: 2 }} disabled>
+        ログインしてください
+      </Button>
+    );
+  }
+
   return (
     <Card
       sx={{
@@ -63,15 +98,7 @@ export default function ViewCard(props) {
     >
       <CardMedia component="img" height="194" image={post.lectureImageUrl} alt="Paella dish" />
       <CardContent>
-        {localStorage.getItem('token') ? (
-          <Button fullWidth variant="contained" sx={{ mt: 1, mb: 2 }} onClick={handleRegisterClick}>
-            登録
-          </Button>
-        ) : (
-          <Button fullWidth variant="contained" sx={{ mt: 1, mb: 2 }} disabled>
-            ログインしてください
-          </Button>
-        )}
+        {button}
         <span style={{ fontWeight: 'bold' }}>このコースの内容:</span>
         <br />
         <div style={{ alignItems: 'center', height: 24, display: 'flex' }}>
