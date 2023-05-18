@@ -19,3 +19,23 @@ class Register(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Test(models.Model):
+    lecture = models.ForeignKey(Lecture,related_name='test_lecture', on_delete=models.CASCADE, blank=True, null=True)
+    question = models.CharField(max_length=1000)
+    option1 = models.CharField(max_length=1000)
+    option2 = models.CharField(max_length=1000)
+    option3 = models.CharField(max_length=1000)
+    option4 = models.CharField(max_length=1000)
+    answer = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.question
+
+class Score(models.Model):
+    lecture = models.ForeignKey(Lecture,related_name='score_lecture', on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(get_user_model(),related_name='score_user', on_delete=models.CASCADE, blank=True, null=True)
+    score = models.IntegerField()
+
+    def __str__(self):
+        return self.user.username
