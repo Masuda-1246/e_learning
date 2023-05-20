@@ -9,6 +9,8 @@ import RegisterLecture from './components/RegisterLecture';
 import MyPage from './components/MyPage';
 import LecturePage from './components/LecturePage';
 import TestPage from './components/TestPage';
+import PassPage from './components/PassPage';
+import CertificatePage from './components/CertificatePage';
 
 const client = new ApolloClient({
   uri: 'https://15.152.49.212:8000/graphql/',
