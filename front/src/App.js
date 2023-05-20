@@ -30,6 +30,8 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/lecture" element={<LecturePage />} />
             <Route path="/test" element={<TestPage />} />
+            <Route path="/pass" element={<PassPage />} />
+            <Route path="/certificate" element={<CertificatePage />} />
           </Routes>
         </BrowserRouter>
       </div>

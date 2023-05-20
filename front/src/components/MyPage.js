@@ -69,9 +69,35 @@ export default function MyPage() {
           </Button>
         </Toolbar>
         <Box sx={{ my: 4 }}></Box>
+        <Box sx={{ my: 4, borderBottom: 1, borderColor: "grey.300"}}>
+          <Typography variant="h5" gutterBottom>
+            受講中の講義
+          </Typography>
+        </Box>
         <Grid container spacing={4}>
           {data.allRegistrations.edges.map((post) => (
-            <LectureStartTile key={post.node.lecture.title} post={post.node.lecture} />
+            <LectureStartTile key={post.node.lecture.title} post={post.node.lecture} isCompleted={post.node.isCompleted} id={post.node.id} isCertificated={false}/>
+          ))}
+        </Grid>
+        <Box sx={{ my: 4 }}></Box>
+        <Box sx={{ my: 4, borderBottom: 1, borderColor: "grey.300"}}>
+          <Typography variant="h5" gutterBottom>
+            受講修了の講義
+          </Typography>
+        </Box>
+        <Grid container spacing={4}>
+          {data.allRegistrations.edges.map((post) => (
+            <LectureStartTile key={post.node.lecture.title} post={post.node.lecture} isCompleted={!post.node.isCompleted} isCertificated={false}/>
+          ))}
+        </Grid>
+        <Box sx={{ my: 4, borderBottom: 1, borderColor: "grey.300"}}>
+          <Typography variant="h5" gutterBottom>
+            発行済み証明書
+          </Typography>
+        </Box>
+        <Grid container spacing={4}>
+          {data.allRegistrations.edges.map((post) => (
+            <LectureStartTile key={post.node.lecture.title} post={post.node.lecture} isCompleted={!post.node.isCompleted} isCertificated={true}/>
           ))}
         </Grid>
       </Container>

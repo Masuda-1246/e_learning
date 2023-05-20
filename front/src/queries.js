@@ -89,6 +89,8 @@ export const GET_MY_LECTURE = gql`
     allRegistrations(user: $user) {
       edges {
         node {
+          id
+          isCompleted
           lecture {
             id
             title
@@ -116,6 +118,47 @@ export const GET_TESTS = gql`
           option3
           option4
         }
+      }
+    }
+  }
+`;
+
+export const CREATE_SCORE = gql`
+  mutation createScore($user: ID!, $lecture: ID!, $score: Int!) {
+    createScore(input: { userId: $user, lectureId: $lecture, score: $score }) {
+      score {
+        id
+      }
+    }
+  }
+`;
+
+export const GET_SCORE = gql`
+  query getScore($user: ID!, $lecture: ID!) {
+    allScores(user: $user, lecture: $lecture) {
+      edges {
+        node {
+          id
+          score
+          createdAt
+          lecture {
+            title
+            author
+          }
+          user {
+            username
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_REGISTER = gql`
+  mutation updateRegister($id: ID!, $user: ID!, $lecture: ID!) {
+    updateRegister(input: { id: $id, userId: $user, lectureId: $lecture }) {
+      registration {
+        id
       }
     }
   }

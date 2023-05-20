@@ -11,13 +11,17 @@ import { useNavigate } from 'react-router-dom';
 
 function LectureStartTile(props) {
   const navigate = useNavigate();
-  const { post } = props;
-
+  const { post, isCompleted, isCertificated, id } = props;
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12} md={6} sx={{ display: isCompleted ? "None":"block" }}>
       <CardActionArea
         onClick={() => {
-          navigate('/lecture', { state: { url: post.lectureVideoElement, id: post.id } });
+          if (isCertificated) {
+            navigate('/certificate', { state: { id: post.id } });
+            return;
+          } else {
+            navigate('/lecture', { state: { url: post.lectureVideoElement, id: post.id, isCompleted: isCompleted, lectureId: id} });
+          }
         }}
       >
         <Card sx={{ display: 'flex' }}>
@@ -25,16 +29,10 @@ function LectureStartTile(props) {
             <Typography component="h2" variant="h5">
               {post.title}
             </Typography>
-            <Typography variant="subtitle1" color="text.secondary">
-              {post.date}
-            </Typography>
-            <Typography variant="subtitle1" color="primary">
-              開始する
-            </Typography>
           </CardContent>
           <CardMedia
             component="img"
-            sx={{ width: 160, display: { xs: 'none', sm: 'block' } }}
+            sx={{ width: 160, maxHeight:100, display: { xs: 'none', sm: 'block' } }}
             image={post.lectureImageUrl}
             alt={post.id}
           />
