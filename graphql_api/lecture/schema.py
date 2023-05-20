@@ -17,6 +17,7 @@ class LectureNode(DjangoObjectType):
           'lecture_image_url': ['exact', 'icontains'],
           'lecture_video_element': ['exact', 'icontains'],
           'author': ['exact', 'icontains'],
+          'created_at': ['exact', 'icontains'],
         }
         interfaces = (relay.Node, )
 
@@ -42,6 +43,7 @@ class TestNode(DjangoObjectType):
           'option3': ['exact', 'icontains'],
           'option4': ['exact', 'icontains'],
           'answer': ['exact', 'icontains'],
+          'created_at': ['exact', 'icontains'],
         }
         interfaces = (relay.Node, )
 
@@ -53,6 +55,7 @@ class ScoreNode(DjangoObjectType):
         'lecture': ['exact'],
         'user': ['exact'],
         'score': ['exact'],
+        'created_at': ['exact', 'icontains'],
       }
       interfaces = (relay.Node, )
 
@@ -70,6 +73,23 @@ class RegisterCreateMutation(relay.ClientIDMutation):
         registration = Register(user=user, lecture=lecture , is_completed=False)
         registration.save()
         return RegisterCreateMutation(registration=registration)
+
+class RegisterUpdateMutation(relay.ClientIDMutation):
+    class Input:
+        id = graphene.ID(required=True)
+        user_id = graphene.ID(required=True)
+        lecture_id = graphene.ID(required=True)
+
+    registration = graphene.Field(RegisterNode)
+
+    @login_required
+    def mutate_and_get_payload(root, info, **input):
+        registration = Register(id=from_global_id(input.get('id'))[1])
+        registration.user = User(id=from_global_id(input.get('user_id'))[1])
+        registration.lecture = Lecture(id=from_global_id(input.get('lecture_id'))[1])
+        registration.is_completed = True
+        registration.save()
+        return RegisterUpdateMutation(registration=registration)
 
 class RegisterDeleteMutation(relay.ClientIDMutation):
     class Input:
@@ -103,6 +123,7 @@ class Mutation:
     create_register = RegisterCreateMutation.Field()
     delete_register = RegisterDeleteMutation.Field()
     create_score = ScoreCreateMutation.Field()
+    update_register = RegisterUpdateMutation.Field()
 
 
 class Query(graphene.ObjectType):
@@ -113,6 +134,7 @@ class Query(graphene.ObjectType):
     all_lectures = DjangoFilterConnectionField(LectureNode)
     all_registrations = DjangoFilterConnectionField(RegisterNode)
     all_tests = DjangoFilterConnectionField(TestNode)
+    all_scores = DjangoFilterConnectionField(ScoreNode)
 
     @login_required
     def resolve_register(self, info, **kwargs):

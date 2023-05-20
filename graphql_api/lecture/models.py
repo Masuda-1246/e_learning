@@ -8,6 +8,8 @@ class Lecture(models.Model):
     lecture_image_url = models.CharField(max_length=1000)
     lecture_video_element = models.TextField()
     author = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -18,7 +20,7 @@ class Register(models.Model):
     is_completed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.username
+        return self.lecture.title
 
 class Test(models.Model):
     lecture = models.ForeignKey(Lecture,related_name='test_lecture', on_delete=models.CASCADE, blank=True, null=True)
@@ -28,6 +30,8 @@ class Test(models.Model):
     option3 = models.CharField(max_length=1000)
     option4 = models.CharField(max_length=1000)
     answer = models.CharField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.question
@@ -36,6 +40,8 @@ class Score(models.Model):
     lecture = models.ForeignKey(Lecture,related_name='score_lecture', on_delete=models.CASCADE, blank=True, null=True)
     user = models.ForeignKey(get_user_model(),related_name='score_user', on_delete=models.CASCADE, blank=True, null=True)
     score = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.username
