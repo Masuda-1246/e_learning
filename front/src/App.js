@@ -13,7 +13,7 @@ import PassPage from './components/PassPage';
 import CertificatePage from './components/CertificatePage';
 
 const client = new ApolloClient({
-  uri: 'https://eee.lux-ai-e-learning.net/graphql',
+  uri: 'https://eee.lux-ai-e-learning.net/graphql/',
   headers: {
     authorization: localStorage.getItem('token') ? `JWT ${localStorage.getItem('token')}` : '',
   },
