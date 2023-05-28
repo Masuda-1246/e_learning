@@ -4,6 +4,10 @@
 現在mocデータを挿入中
 [https://e-learning-rose-one.vercel.app/](https://e-learning-rose-one.vercel.app/)
 
+## DEMO
+
+
+
 ## 環境
 - Macbook Air(M1) 
 
@@ -35,7 +39,7 @@ react-pdf" | 6.2.2
 react-router-dom | 6.11.1
 
 ## アーキテクチャ
-[プレゼンテーション1.pdf](https://github.com/Masuda-1246/e_learning/files/11583434/1.pdf)
+![プレゼンテーション1](https://github.com/Masuda-1246/e_learning/assets/96477942/df62d7a2-469c-4406-8dc7-a4b4d8c05b3c)
 
 ## その他技術
 - Vercel 
