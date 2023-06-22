@@ -105,8 +105,12 @@ WSGI_APPLICATION = 'graphql_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'e_learning',
+        'HOST': 'database-1.ccsovp7p7qud.ap-northeast-3.rds.amazonaws.com',
+        'USER': 'admin',
+        'PASSWORD': 'admin1234',
+        'PORT': '3306',
     }
 }
 

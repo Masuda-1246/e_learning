@@ -70,8 +70,8 @@ export default function RegisterLecture() {
                 </Box>
               </Grid>
             </Grid>
+            <ViewCard post={data.lecture} lecture_id={location.state.id} />
           </Paper>
-          <ViewCard post={data.lecture} lecture_id={location.state.id} />
           <LearningContents post={data.lecture} />
         </Container>
       </ThemeProvider>

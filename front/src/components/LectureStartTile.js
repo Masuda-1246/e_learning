@@ -8,6 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 function LectureStartTile(props) {
   const navigate = useNavigate();
@@ -29,10 +30,14 @@ function LectureStartTile(props) {
             <Typography component="h2" variant="h5">
               {post.title}
             </Typography>
+            <Box sx={{ my:1 }} />
+            <Typography variant="subtitle1" color="primary">
+              開始する
+            </Typography>
           </CardContent>
           <CardMedia
             component="img"
-            sx={{ width: 160, maxHeight:100, display: { xs: 'none', sm: 'block' } }}
+            sx={{ width: 160, height:120, display: { xs: 'none', sm: 'block' } }}
             image={post.lectureImageUrl}
             alt={post.id}
           />

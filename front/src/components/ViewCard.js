@@ -38,11 +38,11 @@ export default function ViewCard(props) {
     setExpanded(!expanded);
   };
 
-  const handleRegisterClick = (event) => {
+  const  handleRegisterClick = async(event) => {
     event.preventDefault();
     console.log(lecture_id);
     console.log(localStorage.getItem('userId'));
-    registerLecture({
+    await registerLecture({
       variables: {
         lecture: lecture_id,
         user: localStorage.getItem('userId'),
@@ -88,9 +88,9 @@ export default function ViewCard(props) {
   return (
     <Card
       sx={{
-        '@media screen and (min-width:600px)': {
-          top: 190,
-          right: 250,
+        '@media screen and (min-width:900px)': {
+          top: "90px",
+          right: "6%",
           position: 'absolute',
           maxWidth: 290,
         },
