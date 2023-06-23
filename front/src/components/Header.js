@@ -31,7 +31,7 @@ function Header() {
           sx={{ flex: 1 }}
         >
           <Link href="/" color="inherit" underline="none">
-            e-learing
+            LuxAI
           </Link>
         </Typography>
         {localStorage.getItem('token') ? (

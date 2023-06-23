@@ -18,7 +18,7 @@ function HeaderNoMenu() {
           sx={{ flex: 1 }}
         >
           <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-            e-learing
+            LuxAI
           </Link>
         </Typography>
         {localStorage.getItem('token') ? (
