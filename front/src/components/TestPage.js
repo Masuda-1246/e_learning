@@ -27,7 +27,7 @@ export default function TestPage() {
     setUserAns(tmp)
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     const ans = {}
     for (let i = 0; i < data.length; i++) {
       ans[i] = Number(data[i].node.answer)
@@ -42,8 +42,8 @@ export default function TestPage() {
     } else {
       if (!location.state.isCompleted) {
         console.log(location.state.lectureId)
-        createScore({variables: {user: localStorage.getItem('userId'), lecture: location.state.id, score: score}})
-        updateRegister({variables: {id: location.state.lectureId, user: localStorage.getItem('userId'), lecture: location.state.id, isCompleted: true}})
+        await createScore({variables: {user: localStorage.getItem('userId'), lecture: location.state.id, score: score}})
+        await updateRegister({variables: {id: location.state.lectureId, user: localStorage.getItem('userId'), lecture: location.state.id, isCompleted: true}})
       }
       navigate('/pass', {state: {answer: ans, userAns: userAns, data: data, id: location.state.id, score: score}})
     }
