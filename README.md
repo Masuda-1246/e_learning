@@ -1,9 +1,5 @@
 # eラーニングシステム
 
-## 成果物
-現在mocデータを挿入中
-[https://e-learning-rose-one.vercel.app/](https://e-learning-rose-one.vercel.app/)
-
 ## DEMO
 
 
